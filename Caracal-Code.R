@@ -33,6 +33,8 @@ library(mapview)
 install.packages("leafpop")
 library(leafpop)
 
+install.packages("move2")
+library(move2)
 
 
 #### Gather iNaturalist data ----
@@ -68,7 +70,8 @@ names(inat_cara_sf)
 
 # Plot data points 
 # using tidyverse
-ggplot() + geom_sf(data = inat_cara_sf)
+ggplot() + 
+  geom_sf(data = inat_cara_sf)
 
 # Add basemap 
 # using rosm, ggspatial, leaflet, htmltools, mapview and leafpop packages
@@ -81,7 +84,7 @@ ggplot() + annotation_map_tile(
 
 leaflet() %>% 
   addTiles(group = "Default") %>% # 
-  addCircleMarkers(data = inat_cara_sf, group = "Caracal caracal", radius = 2, color = "orange")
+  addCircleMarkers(data = inat_cara_sf, group = "Caracal caracal", radius = 2, color = "purple")
 
 # make her interactive
 l_inat <- inat_cara_sf %>% 
@@ -94,6 +97,35 @@ mapview(inat_cara_sf,
 
 #### Add Urban Caracal Project's Movebank data
 
-ucp_cara <- st_read("ucp_observations_20260226.shp")
+# ucp_cara <- st_read("ucp_observations_20260226.shp")
+# ucp_new <- move("Caracal movement ecology study in Cape Town, South Africa.csv")
+
+ucp_new <- read.csv("Caracal movement ecology study in Cape Town, South Africa.csv")
+
+ucp_sf <- ucp_new %>%
+  filter(!is.na(location.long)) %>% # Remove missing GPS points
+  st_as_sf(coords = c("location.long", "location.lat"), crs = 4326)
+
+class(ucp_sf)
 
 
+# Plot UCP
+
+# ucp_map <- ggplot() + annotation_map_tile(
+#  type = "hotstyle", progress = "none") + 
+#  geom_sf(data = ucp_sf)
+
+ucp_map <- leaflet() %>% 
+  addTiles(group = "Default") %>% 
+  addCircleMarkers(data = ucp_sf, radius = 0.5, color = "orange")
+
+ucp_map
+
+
+caracal_map <- leaflet() %>% 
+  addTiles(group = "Default") %>% 
+  addCircleMarkers(data = caracal_sf, radius = 0.5, color = "orange") %>% 
+  addCircleMarkers(data = inat_cara_sf, group = "Caracal caracal", radius = 2, color = "purple")
+
+caracal_map
+  
