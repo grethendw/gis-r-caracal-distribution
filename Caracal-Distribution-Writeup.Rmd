@@ -90,6 +90,8 @@ The Movebank database where [Urban Caracal Project](https://www.urbancaracal.org
 
 The data file in the GitHub repository ("movebank_caracal_jasper.csv") has only the data for a caracal called Jasper-TMC08. The full dataset can be accessed on [Movebank](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571). 
 
+The Movebank data are under a Creative Commons Attribution-NonCommercial (CC BY-NC) licence.
+
 <br/>
 
 Read data into R and convert to spatial data:
