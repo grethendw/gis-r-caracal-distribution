@@ -5,36 +5,15 @@ getwd()
 rm(list = ls())
 
 #### Load packages ----
-install.packages("remotes")
-library("rinat")
 
-install.packages("sf")
+library(rinat)
 library(sf)
-
 library(tidyverse)
-
-install.packages("rosm")
 library(rosm)
-
-install.packages("ggspatial")
 library(ggspatial)
-
-install.packages("prettymapr")
-library(prettymapr)
-
-install.packages("leaflet")
 library(leaflet)
-
-install.packages("htmltools")
-library(htmltools)
-
-install.packages("mapview")
 library(mapview)
-
-install.packages("leafpop")
 library(leafpop)
-
-install.packages("move2")
 library(move2)
 
 
@@ -48,6 +27,7 @@ inat_obs_raw <- get_inat_obs(taxon_name = "Caracal caracal",
 
 # There are a bunch of "swimming" caracals in the middle of the ocean because their locations have been obscured. 
 # Fix:
+
 inat_obs <- inat_obs_raw %>% 
   filter(coordinates_obscured == "false")
 
@@ -88,28 +68,30 @@ mapview(sighting,
 
 #### READ Urban Caracal Project's Movebank data ----
 
-ucp_csv <- read.csv("Caracal movement ecology study in Cape Town, South Africa.csv")
+jasper_movebank <- read.csv2("data/jasper_movebank.csv")
 
-ucp_sf <- ucp_csv %>%
-  filter(!is.na(location.long)) %>%                             # Remove missing GPS points or it won't run
-  filter(individual.local.identifier == "Jasper - TMC08") %>%   # picked one cat otherwise there are almost 60k observations
-  st_as_sf(coords = c("location.long", "location.lat"), 
-           crs = 4326)
+as.tibble(jasper_movebank)
 
-class(ucp_sf)
-# [1] "sf"         "data.frame"
+jasper_sf <- jasper_movebank %>%
+  filter(!is.na(location_long)) %>%          # Remove missing GPS points or it won't run
+  st_as_sf(coords = c("location_long", "location_lat"), crs = 4326)
+
 
 
 # PLOT Movebank data ----
 
 # Figure 2
-ucp_map <- leaflet() %>% 
-  addTiles(group = "Default") %>% 
-  addCircleMarkers(data = ucp_sf, 
-                   radius = 0.5, 
-                   color = "blue")
+jasper_map <- ggplot() + 
+  annotation_map_tile(type = "osm", progress = "none") + 
+  geom_sf(data = jasper_sf)
 
-ucp_map
+jasper_map <- leaflet() %>% 
+  addTiles(group = "Default") %>% 
+  addCircleMarkers(data = jasper_sf, 
+                   radius = 0.2, 
+                   color = "orange")
+
+jasper_map
 
 
 #### Plot combined map ----
@@ -117,8 +99,8 @@ ucp_map
 # Figure 3 - ggplot
 caracal_map <- ggplot() + 
   annotation_map_tile(type = "osm", progress = "none") + 
-  geom_sf(data = ucp_sf, color = "orange") +
-  geom_sf(data = inat_sf, color = "purple")
+  geom_sf(data = inat_sf, color = "purple") +
+  geom_sf(data = jasper_sf, color = "orange") 
 
 caracal_map
   
