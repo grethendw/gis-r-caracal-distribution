@@ -1,6 +1,3 @@
-getwd()
-# "/Users/User/Documents/GIT/gis-r-caracal-distribution/GIS-R-Caracal-Distribution"
-# I know, I know. It didn't need a subfolder, but when I tried to fix it the first time, I lost all my progress.
 
 rm(list = ls())
 
