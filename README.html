@@ -360,36 +360,32 @@ display: none;
 <p><br /></p>
 <p>The goal of GIS-R-Caracal-Distribution is to map caracal sightings
 reported on iNaturalist and the Urban Caracal Project.</p>
-<p>To achieve this, iNaturalist data was mapped using the mapview
-package, Movebank data was mapped with leaflet, and a combined map was
-made using ggspatial.</p>
+<p>To achieve this, iNaturalist data were mapped using the
+<code>mapview</code> package, Movebank data were mapped with leaflet,
+and a combined map was made using <code>ggspatial</code>.</p>
 <p>The files in this GitHub repository are:</p>
 <p><br /></p>
-<div id="main-branch" class="section level4">
-<h4>Main Branch</h4>
+<div id="main-branch" class="section level2">
+<h2>Main Branch</h2>
 <ol style="list-style-type: decimal">
-<li><strong>Caracal-Distribution-Writeup</strong> (.Rmd and .html)
-describes of the workflow (process and code) used to create the
-maps.</li>
-<li><strong>Caracal-Map.R</strong> is the R code used to create the
-maps.</li>
-<li><strong>GIS-R-Caracal-Distribution.Rproj</strong> contains
-project-specific settings.</li>
+<li><strong>Caracal-Distribution-Writeup</strong> (<a href="Caracal-Distribution-Writeup.Rmd">.Rmd</a> and <a href="Caracal-Distribution-Writeup.html">.html</a>) describes of the
+workflow (process and code) used to create the maps.</li>
+<li><strong><a href="Caracal-Map.R">Caracal-Map.R</a></strong> is the R
+code used to create the maps.</li>
+<li><strong><a href="GIS-R-Caracal-Distribution.Rproj">GIS-R-Caracal-Distribution.Rproj</a></strong>
+contains project-specific settings.</li>
 </ol>
-<p><br /></p>
 </div>
-<div id="data" class="section level4">
-<h4>Data</h4>
+<div id="data" class="section level2">
+<h2>Data</h2>
 <p><em>Note: There is no data frame for iNaturalist as the data were
 pulled directly to R via the rinat package.</em></p>
 <ol style="list-style-type: decimal">
 <li><strong>jasper_movebank.csv</strong> is the data frame used to map
 the movement of a single caracal using Movebank data.</li>
 </ol>
-<p><br /></p>
-</div>
-<div id="jasper-data-columns-explained" class="section level4">
-<h4>Jasper Data Columns Explained</h4>
+<div id="jasper-data-columns-explained" class="section level3">
+<h3>Jasper Data Columns Explained</h3>
 <ol style="list-style-type: decimal">
 <li><strong>Event ID:</strong> the unique identifier for each
 observation</li>
@@ -416,65 +412,61 @@ animal observed, e.g. its name and tag code</li>
 <p>For more information on the variables included in this dataset, go to
 the <a href="https://www.movebank.org/cms/movebank-content/movebank-attribute-dictionary">Movebank
 Attribute Dictionary</a></p>
-<p><br /></p>
 </div>
-<div id="workflow" class="section level4">
-<h4>Workflow</h4>
-<p><em>See Caracal-Distribution-Writeup.Rmd for more detail.</em></p>
-<p><br /></p>
-<div id="packages-used" class="section level5">
-<h5>Packages used</h5>
+</div>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
+<p><em>See <a href="Caracal-Distribution-Writeup.Rmd">Caracal-Distribution-Writeup.Rmd</a>
+for more detail.</em></p>
+<div id="packages-used" class="section level3">
+<h3>Packages used</h3>
 <ul>
-<li>rinat</li>
-<li>sf</li>
-<li>tidyverse</li>
-<li>rosm</li>
-<li>ggspatial</li>
-<li>leaflet</li>
-<li>mapview</li>
-<li>leafpop</li>
-<li>move2</li>
+<li><code>rinat</code></li>
+<li><code>sf</code></li>
+<li><code>tidyverse</code></li>
+<li><code>rosm</code></li>
+<li><code>ggspatial</code></li>
+<li><code>leaflet</code></li>
+<li><code>mapview</code></li>
+<li><code>leafpop</code></li>
+<li><code>move2</code></li>
 </ul>
-<p><br /></p>
 </div>
-<div id="inaturalist-data" class="section level5">
-<h5>iNaturalist data</h5>
-<p>iNaturalist data (.csv) was read into R using the rinat package. The
-data was for reported sightings of caracals (<em>Caracal caracal</em>)
-in the Cape Peninsula.</p>
-<p>Some observations had their locations obscured by the users who
-submitted the sightings, so some caracals appeared in the middle of the
-ocean. These entries were removed using the filter function.</p>
+<div id="inaturalist-data" class="section level3">
+<h3>iNaturalist data</h3>
+<p>iNaturalist data (.csv) were read into R using the <code>rinat</code>
+package. The data were for reported sightings of caracals (<em>Caracal
+caracal</em>) in the Cape Peninsula.Some observations had their
+locations obscured by the users who submitted the sightings, so some
+caracals appeared in the middle of the ocean. These entries were removed
+using the filter function.</p>
 <p>The data frame was converted to a simple feature object using
-st_as_sf() so that it could be used for mapping.</p>
-<p>The spatial data was then mapped using the mutate(), rename() and
-mapview() functions. The result was an interactive map where users can
-select individual observations and see the iNaturalist entry (who
-submitted it, the link to the observation, and the picture).</p>
-<p><br /></p>
+<code>st_as_sf</code> so that it could be used for mapping.The spatial
+data were then mapped using the <code>mutate</code>,
+<code>rename</code>, and <code>mapview</code> functions.</p>
+<p>The result was an interactive map where users can select individual
+observations and see the iNaturalist entry (who submitted it, the link
+to the observation, and the picture).</p>
 </div>
-<div id="movebank-data" class="section level5">
-<h5>Movebank data</h5>
+<div id="movebank-data" class="section level3">
+<h3>Movebank data</h3>
 <p>A study by Serieys and Bishop (2024) stored a caracal distribution
 dataset on Movebank, which was accessed via the <a href="https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571">Movebank
 website</a> by searching “caracal”. The raw Movebank dataset has over
 57,000 observations, so a single caracal was selected for the purpose of
-this project. The data was altered on a new Excel spreadsheet (leaving
+this project. The data were altered on a new Excel spreadsheet (leaving
 the raw data intact) so that a smaller file could be loaded onto R. The
 selected caracal is called Jasper-TMC08 and had roughly 1,300
 observations in the Cape Peninsula.</p>
-<p>Jasper’s distribution data were mapped using ggplot() and
-leaflet().</p>
-<p>The result was an interactive map with a zoom function overlaid on
-the City of Cape Town’s road map.</p>
-<p><br /></p>
+<p>Jasper’s distribution data were mapped using <code>ggplot</code> and
+<code>leaflet</code>. The result was an interactive map with a zoom
+function overlaid on the City of Cape Town’s road map.</p>
 </div>
-<div id="combined-map" class="section level5">
-<h5>Combined map</h5>
-<p>A map combining the iNaturalist and Movebank data was made using
-ggplot(). This is a static map of caracal distribution in the Cape
-Peninsula.</p>
-<p><br /></p>
+<div id="combined-map" class="section level3">
+<h3>Combined map</h3>
+<p>A map combining the iNaturalist and Movebank data were made using
+<code>ggplot</code>. This is a static map of caracal distribution in the
+Cape Peninsula.</p>
 </div>
 </div>
 </div>
