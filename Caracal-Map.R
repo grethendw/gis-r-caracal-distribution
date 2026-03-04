@@ -63,7 +63,7 @@ mapview(sighting,
 
 
 
-#### READ Urban Caracal Project's Movebank data ----
+#### READ Movebank data ----
 
 jasper_movebank <- read.csv2("data/jasper_movebank.csv")
 
@@ -96,7 +96,7 @@ jasper_map
 # Figure 3 - ggplot
 caracal_map <- ggplot() + 
   annotation_map_tile(type = "osm", progress = "none") + 
-  geom_sf(data = inat_sf, color = "purple") +
+  geom_sf(data = inat_sf, color = "blue") +
   geom_sf(data = jasper_sf, color = "orange") 
 
 caracal_map
