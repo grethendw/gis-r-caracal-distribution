@@ -102,4 +102,5 @@ The result was an interactive map with a zoom function overlaid on the City of C
 A map combining the iNaturalist and Movebank data was made using ggplot(). 
 This is a static map of caracal distribution in the Cape Peninsula.
 
+<br/>
 
