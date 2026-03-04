@@ -50,7 +50,7 @@ class(inat_sf)
 
 #### PLOT iNaturalist data ----
 
-# Figure 1 - mapview (url plus pic)
+# Figure 1
 sighting <- inat_sf %>% 
   mutate('🔗' = paste("<b><a href='", url, "'>Link to iNat observation</a></b>"),
          '📷' = paste("<img src ='", image_url , "' height='128'>")) %>% 
@@ -93,11 +93,13 @@ jasper_map
 
 #### Plot combined map ----
 
-# Figure 3 - ggplot
+# Figure 3
 caracal_map <- ggplot() + 
   annotation_map_tile(type = "osm", progress = "none") + 
   geom_sf(data = inat_sf, color = "blue") +
   geom_sf(data = jasper_sf, color = "orange") 
 
 caracal_map
+
+
   
