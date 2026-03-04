@@ -17,7 +17,7 @@ The files in this GitHub repository are:
 <br/>
 
 #### Main Branch
-1. **Caracal-Distribution-Writeup** (.Rmd and .html), which is the description of the process and code used to create the maps.
+1. **Caracal-Distribution-Writeup** (.Rmd and .html) describes of the process and code used to create the maps.
 2. **Caracal-Map.R** is the R code used to create the maps.
 3. **GIS-R-Caracal-Distribution.Rproj** contains project-specific settings.
 
