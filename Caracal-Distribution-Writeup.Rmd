@@ -11,18 +11,17 @@ output: html_document
 
 The urban caracal experiences significant anthropogenic challenges that impact their territories, foraging and lifespans. Caracals living in the Cape Peninsula frequently encounter humans as they forage along the urban edge. 
 
-Distribution data was taken from two sources: iNaturalist, a free citizen science platform where users upload sightings of plants, animals and fungi; and Movebank, an online databse for animal tracking and bio-logging data. 
+Distribution data were taken from two sources: iNaturalist, a free citizen science platform where users upload sightings of plants, animals and fungi; and Movebank, an online databse for animal tracking and bio-logging data. 
 
 The purpose of this project was to code maps that show the distribution of reported iNaturalist sightings and the sightings of a single tagged caracal recorded in the Movebank dataset. 
 
 <br/>
 
-
 ## Methods and Code
 
 ### iNaturalist sightings
 
-Read data into R using rinat
+Read data into R using `rinat`:
 ```{r}
 library("rinat")       #  Barve, V., & Hart, E. (2025)
 
@@ -86,9 +85,9 @@ The map is interactive. Hovering over an observation ("sighting") displays a num
 
 ### Movebank data
 
-The Movebank database where [Urban Caracal Project](https://www.urbancaracal.org/) (UCP) stores its distribution data has over 57,000 observations and is more than 10MB big, so a single cat was selected to map. The data is from a study by Serieys LEK and Bishop JM in 2024.
+The Movebank database where [Urban Caracal Project](https://www.urbancaracal.org/) (UCP) stores its distribution data has over 57,000 observations and is more than 10MB big, so a single cat was selected to map. The data is from a study by Serieys and Bishop in 2024.
 
-The data file in the GitHub repository ("movebank_caracal_jasper.csv") has only the data for a caracal called Jasper-TMC08. The full dataset can be accessed on [Movebank](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571). 
+The data file in the GitHub repository ("movebank_caracal_jasper.csv") has only the data for a caracal called Jasper-TMC08. The [full dataset](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571) can be accessed on Movebank. 
 
 The Movebank data are under a Creative Commons Attribution-NonCommercial (CC BY-NC) licence.
 
@@ -141,7 +140,7 @@ caracal_map <- ggplot() +
 caracal_map
 ```
 
-**Figure 3** shows Movebank's data on Jasper's movements (orange) and the iNaturalist sightings (purple) on a static map of the Cape Peninsula.
+**Figure 3** shows Movebank's data on Jasper's movements (orange) and the iNaturalist sightings (blue) on a static map of the Cape Peninsula.
 
 <br/>
 
