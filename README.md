@@ -1,15 +1,12 @@
 
 # GIS-R-Caracal-Distribution
 
-<!-- badges: start -->
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/grethendw/gis-r-caracal-distribution/HEAD)
-<!-- badges: end -->
 
 <br/>
 
-The goal of GIS-R-Caracal-Distribution is to map caracal sightings reported on iNaturalist and the Urban Caracal Project. 
+The goal of GIS-R-Caracal-Distribution is to map caracal sightings reported on iNaturalist and GPS location data from a study by Serieys and Bishop JM (2025).
 
-To achieve this, iNaturalist data were mapped using the `mapview` package, Movebank data were mapped with leaflet, and a combined map was made using `ggspatial`.
+To achieve this, iNaturalist data were mapped using the `mapview` package, Movebank data were mapped with `leaflet`, and a combined map was made using `ggspatial`.
 
 The files in this GitHub repository are:
 
@@ -70,10 +67,7 @@ The result was an interactive map where users can select individual observations
 
 ### Movebank data
 
-A study by Serieys and Bishop (2024) stored a caracal distribution dataset on Movebank, which was accessed via the [Movebank website](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571) by searching "caracal".
-The raw Movebank dataset has over 57,000 observations, so a single caracal was selected for the purpose of this project.
-The data were altered on a new Excel spreadsheet (leaving the raw data intact) so that a smaller file could be loaded onto R.
-The selected caracal is called Jasper-TMC08 and had roughly 1,300 observations in the Cape Peninsula.
+The study by Serieys and Bishop (2025) stored a caracal distribution dataset on Movebank, which was accessed via the [Movebank website](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571) by searching "caracal". The raw Movebank dataset has over 57,000 GPS location observations, so a single caracal was selected for the purpose of this project. The data were altered on a new Excel spreadsheet (leaving the raw data intact) so that a smaller file could be loaded onto R. The selected caracal is called Jasper-TMC08 and had roughly 1,300 GPS location observations in the Cape Peninsula.
 
 Jasper's distribution data were mapped using `ggplot` and `leaflet`. The result was an interactive map with a zoom function overlaid on the City of Cape Town's road map.
 
