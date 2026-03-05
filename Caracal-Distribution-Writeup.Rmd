@@ -9,11 +9,11 @@ output: html_document
 
 ## Introduction
 
-The urban caracal experiences significant anthropogenic challenges that impact their territories, foraging and lifespans. Caracals living in the Cape Peninsula frequently encounter humans as they forage along the urban edge. 
+The urban caracal experiences significant anthropogenic challenges that impact their territories, foraging and lifespans. Major roads and fenced green areas particularly limit their ranges. However, some caracals choose to forage in disturbed areas as novel resources can be found there. 
 
 Distribution data were taken from two sources: iNaturalist, a free citizen science platform where users upload sightings of plants, animals and fungi; and Movebank, an online databse for animal tracking and bio-logging data. 
 
-The purpose of this project was to code maps that show the distribution of reported iNaturalist sightings and the sightings of a single tagged caracal recorded in the Movebank dataset. 
+The purpose of this project was to code maps that show the distribution of reported iNaturalist sightings and the GPS readings of a single tagged caracal recorded in the Movebank dataset. 
 
 <br/>
 
@@ -23,7 +23,7 @@ The purpose of this project was to code maps that show the distribution of repor
 
 Read data into R using `rinat`:
 ```{r}
-library("rinat")       #  Barve, V., & Hart, E. (2025)
+library("rinat")       #  Barve & Hart (2025)
 
 inat_obs_raw <- get_inat_obs(taxon_name = "Caracal caracal",
                    bounds = c(-35, 18, -33.5, 18.5), 
@@ -45,10 +45,10 @@ inat_obs <- inat_obs_raw %>%
 <br/>
 
 
-The data frame was converted to spatial data:
+The data frame was then converted to spatial data:
 
 ```{r}
-library(sf)            # Pebesma, E., & Bivand, R. (2023), Pebesma, E. (2018)
+library(sf)            # Pebesma & Bivand (2023), Pebesma (2018)
 
 inat_sf <- st_as_sf(
   inat_obs, 
@@ -61,10 +61,10 @@ inat_sf <- st_as_sf(
 The data were plotted onto an interactive map:
 
 ```{r}
-library(leaflet)     # Cheng, J. et al. (2025)
-library(mapview)     # Appelhans, T. et al (2025)
-library(leafpop)     # Appelhans, T., & Detsch F (2021)
-library(move2)       # Kranstauber, B. et al. (2024)
+library(leaflet)     # Cheng et al. (2025)
+library(mapview)     # Appelhans et al (2025)
+library(leafpop)     # Appelhans & Detsch (2021)
+library(move2)       # Kranstauber et al. (2024)
 
 sighting <- inat_sf %>% 
   mutate('🔗' = paste("<b><a href='", url, "'>Link to iNat observation</a></b>"),
@@ -85,7 +85,7 @@ The map is interactive. Hovering over an observation ("sighting") displays a num
 
 ### Movebank data
 
-The Movebank database where [Urban Caracal Project](https://www.urbancaracal.org/) (UCP) stores its distribution data has over 57,000 observations and is more than 10MB big, so a single cat was selected to map. The data is from a study by Serieys and Bishop in 2024.
+The Movebank database where [Urban Caracal Project](https://www.urbancaracal.org/) (UCP) stores its distribution data has over 57,000 observations and is more than 10MB big, so a single cat was selected to map. The data is from a study by Serieys and Bishop in 2025.
 
 The data file in the GitHub repository ("movebank_caracal_jasper.csv") has only the data for a caracal called Jasper-TMC08. The [full dataset](https://www.movebank.org/cms/webapp?gwt_fragment=page=studies,path=study1832666571) can be accessed on Movebank. 
 
@@ -108,7 +108,7 @@ jasper_sf <- jasper_movebank %>%
 Plot the Movebank data:
 
 ```{r}
-library(ggspatial)       # Dunnington, D. (2025)
+library(ggspatial)       # Dunnington (2025)
 
 jasper_map <- ggplot() + 
   annotation_map_tile(type = "osm", progress = "none") + 
@@ -130,7 +130,7 @@ jasper_map
 ### Combined map
 
 ```{r}
-library(rosm)            # Dunnington, D. (2026)
+library(rosm)            # Dunnington, D (2026)
 
 caracal_map <- ggplot() + 
   annotation_map_tile(type = "osm", progress = "none") + 
@@ -146,28 +146,33 @@ caracal_map
 
 ## References
 
-* Serieys LEK, Bishop JM. 2024. Data from: Study "Caracal movement ecology study in Cape Town, South Africa". Movebank Data Repository. https://doi.org/10.5441/001/1.317_2
-* iNaturalist community. Observations of Caracal caracal from Cape Peninsula, South Africa. Exported from https://www.inaturalist.org on 1 March 2026
-* Barve V, Hart E (2025). _rinat: Access 'iNaturalist' Data Through APIs_. R package version 0.1.10.9000, commit
-  44c9f1c892765e40948b2a286a53f302328ccf03, <https://github.com/ropensci/rinat>.
-* Wickham et al. (2019). "Welcome to the tidyverse." Journal of Open Source Software, 4(43), 1686. doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
-* Pebesma, E., & Bivand, R. (2023). Spatial Data Science: With Applications in R. Chapman and Hall/CRC.
-  https://doi.org/10.1201/9780429459016
-* Pebesma, E., 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1),
-  439-446, https://doi.org/10.32614/RJ-2018-009
-* Cheng J, Schloerke B, Karambelkar B, Xie Y, Aden-Buie G (2025). _leaflet: Create Interactive Web Maps with the
-  JavaScript 'Leaflet' Library_. doi:10.32614/CRAN.package.leaflet <https://doi.org/10.32614/CRAN.package.leaflet>,
-  R package version 2.2.3, <https://CRAN.R-project.org/package=leaflet>.
-* Appelhans T, Detsch F, Reudenbach C, Woellauer S (2025). _mapview: Interactive Viewing of Spatial Data in R_.
-  doi:10.32614/CRAN.package.mapview <https://doi.org/10.32614/CRAN.package.mapview>, R package version 2.11.4,
-  <https://CRAN.R-project.org/package=mapview>.
 * Appelhans T, Detsch F (2021). _leafpop: Include Tables, Images and Graphs in Leaflet Pop-Ups_. doi:10.32614/CRAN.package.leafpop
   <https://doi.org/10.32614/CRAN.package.leafpop>, R package version 0.1.0, <https://CRAN.R-project.org/package=leafpop>.
-* Kranstauber B, Safi K, Scharf AK (2024). “move2: R package for processing movement data.” _Methods in Ecology and Evolution_.
-  doi:10.1111/2041-210X.14383 <https://doi.org/10.1111/2041-210X.14383>, <https://doi.org/10.1111/2041-210X.14383>.
-* Dunnington D (2025). _ggspatial: Spatial Data Framework for ggplot2_. doi:10.32614/CRAN.package.ggspatial
-  <https://doi.org/10.32614/CRAN.package.ggspatial>, R package version 1.1.10, <https://CRAN.R-project.org/package=ggspatial>.
-* Dunnington D (2026). _rosm: Plot Raster Map Tiles from Open Street Map and Other Sources_. doi:10.32614/CRAN.package.rosm
-  <https://doi.org/10.32614/CRAN.package.rosm>, R package version 0.3.1, <https://CRAN.R-project.org/package=rosm>.
+  
+* Appelhans T, Detsch F, Reudenbach C, Woellauer S (2025). _mapview: Interactive Viewing of Spatial Data in R_. doi:10.32614/CRAN.package.mapview <https://doi.org/10.32614/CRAN.package.mapview>, R package version 2.11.4, <https://CRAN.R-project.org/package=mapview>.
+
+* Barve V, Hart E (2025). _rinat: Access 'iNaturalist' Data Through APIs_. R package version 0.1.10.9000, commit 44c9f1c892765e40948b2a286a53f302328ccf03, <https://github.com/ropensci/rinat>.
+
+* Cheng J, Schloerke B, Karambelkar B, Xie Y, Aden-Buie G (2025). _leaflet: Create Interactive Web Maps with the JavaScript 'Leaflet' Library_. doi:10.32614/CRAN.package.leaflet <https://doi.org/10.32614/CRAN.package.leaflet>, R package version 2.2.3, <https://CRAN.R-project.org/package=leaflet>.
+
+* Dunnington, D (2025). _ggspatial: Spatial Data Framework for ggplot2_. doi:10.32614/CRAN.package.ggspatial <https://doi.org/10.32614/CRAN.package.ggspatial>, R package version 1.1.10, <https://CRAN.R-project.org/package=ggspatial>.
+
+* Dunnington, D (2026). _rosm: Plot Raster Map Tiles from Open Street Map and Other Sources_. doi:10.32614/CRAN.package.rosm <https://doi.org/10.32614/CRAN.package.rosm>, R package version 0.3.1, <https://CRAN.R-project.org/package=rosm>.
+
+* iNaturalist community. Observations of Caracal caracal from Cape Peninsula, South Africa. Exported from https://www.inaturalist.org on 1 March 2026
+
+* Kranstauber B, Safi K, Scharf AK (2024). “move2: R package for processing movement data.” _Methods in Ecology and Evolution_. doi:10.1111/2041-210X.14383 <https://doi.org/10.1111/2041-210X.14383>, <https://doi.org/10.1111/2041-210X.14383>.
+
+* Pebesma, E, 2018. Simple Features for R: Standardized Support for Spatial Vector Data. The R Journal 10 (1),439-446, https://doi.org/10.32614/RJ-2018-009
+
+* Pebesma, E, & Bivand, R (2023). Spatial Data Science: With Applications in R. Chapman and Hall/CRC. https://doi.org/10.1201/9780429459016
+
+* Serieys, LEK, & Bishop, JM 2025. Data from: Study "Caracal movement ecology study in Cape Town, South Africa". Movebank Data Repository. https://doi.org/10.5441/001/1.317_2
+
+* Wickham et al. (2019). "Welcome to the tidyverse." Journal of Open Source Software, 4(43), 1686. doi:10.21105/joss.01686 <https://doi.org/10.21105/joss.01686>.
+
+
+
+
 
 
