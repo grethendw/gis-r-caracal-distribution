@@ -1,6 +1,9 @@
 
 # GIS-R-Caracal-Distribution
 
+<br/>
+
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/grethendw/gis-r-caracal-distribution/HEAD)
 
 <br/>
 
@@ -20,7 +23,7 @@ The files in this GitHub repository are:
 
 ## Data
 
-*Note: There is no data frame for iNaturalist as the data were pulled directly to R via the rinat package.*
+*Note: There is no data frame for iNaturalist as the data were pulled directly to R via the `rinat` package.*
 
 1. **jasper_movebank.csv** is the data frame used to map the movement of a single caracal using Movebank data.
 
